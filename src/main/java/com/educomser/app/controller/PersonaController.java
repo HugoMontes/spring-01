@@ -66,4 +66,11 @@ public class PersonaController {
     public RedirectView redireccionDos(){
         return new RedirectView("/persona/listar");
     }
+    
+    // Generar error 500    
+    @GetMapping("/calcular")
+    public RedirectView calcular(){
+        int i=6/0;
+        return new RedirectView("/persona/listar");
+    }
 }
