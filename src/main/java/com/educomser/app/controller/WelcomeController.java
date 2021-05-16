@@ -34,23 +34,23 @@ public class WelcomeController {
 		mv.addObject("nombre", "Lucas");
 		return mv;
 	}
-	
+
 	// Primera forma de enviar parametros
-    // http://localhost:8080/welcome/parametros/uno?nombre=Pedro
-    @GetMapping("/parametros/uno")
-    public ModelAndView parametrosUno(@RequestParam(name="nombre") String nombre){
-        ModelAndView mv=new ModelAndView("welcome/saludo");
-        mv.addObject("nombre", nombre);
-        return mv;
-    }
-    
-    // Segunda forma de enviar parametros
-    // http://localhost:8080/welcome/parametros/dos/Maria
-    @GetMapping("/parametros/dos/{nombre}")
-    public ModelAndView parametrosDos(@PathVariable("nombre") String nombre){
-        ModelAndView mv=new ModelAndView("welcome/saludo");
-        mv.addObject("nombre", nombre);
-        return mv;
-    }
+	// http://localhost:8080/welcome/parametros/uno?nombre=Pedro
+	@GetMapping("/parametros/uno")
+	public ModelAndView parametrosUno(@RequestParam(name = "nombre") String nombre) {
+		ModelAndView mv = new ModelAndView("welcome/saludo");
+		mv.addObject("nombre", nombre);
+		return mv;
+	}
+
+	// Segunda forma de enviar parametros
+	// http://localhost:8080/welcome/parametros/dos/Maria
+	@GetMapping("/parametros/dos/{nombre}")
+	public ModelAndView parametrosDos(@PathVariable("nombre") String nombre) {
+		ModelAndView mv = new ModelAndView("welcome/saludo");
+		mv.addObject("nombre", nombre);
+		return mv;
+	}
 
 }
