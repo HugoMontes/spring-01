@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.educomser.app.model.Persona;
 
@@ -54,4 +55,15 @@ public class PersonaController {
 		mv.addObject("persona", persona);
 		return mv;
 	}
+	
+    // Primera forma
+    @GetMapping("/redireccion/uno")
+    public String redireccionUno(){
+        return "redirect:/persona/formulario";
+    }
+    // Segunda forma    
+    @GetMapping("/redireccion/dos")
+    public RedirectView redireccionDos(){
+        return new RedirectView("/persona/listar");
+    }
 }
