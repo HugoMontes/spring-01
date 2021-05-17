@@ -9,7 +9,9 @@
 	<form action="#" th:action="@{/persona/reporte}"
 		th:object="${persona}" method="post">
 		<p>Nombre: <input type="text" th:field="*{nombre}" /></p>
+		<p th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}">Nombre tiene errores</p>
 		<p>Edad: <input type="number" th:field="*{edad}" /></p>
+		<p th:if="${#fields.hasErrors('edad')}" th:errors="*{edad}">Edad tiene errores</p>
 		<p><input type="submit" value="Enviar" /></p>
 	</form>
 </body>

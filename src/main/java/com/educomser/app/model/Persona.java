@@ -1,8 +1,17 @@
 package com.educomser.app.model;
 
-public class Persona {
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
+public class Persona {
+	
+	@NotNull
+    @Size(min=2, max = 10)
 	private String nombre;
+	
+	@NotNull
+    @Min(18)
 	private int edad;
 	
 	public Persona() {
