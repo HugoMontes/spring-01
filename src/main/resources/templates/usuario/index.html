@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>USUARIOS</h1>
+	<table>
+		<tr>
+			<th>ID</th>
+			<th>NOMBRE</th>
+			<th>AP. PATERNO</th>
+			<th>AP. MATERNO</th>
+			<th>FECHA NAC.</th>
+			<th>USUARIO</th>
+			<th>EMAIL</th>
+			<th>ESTADO</th>
+		</tr>
+		<tr th:each="usr : ${usuarios}">
+			<td><span th:text="${usr.id}"></span></td>
+			<td><span th:text="${usr.nombre}"></span></td>
+			<td><span th:text="${usr.apellidoPaterno}"></span></td>
+			<td><span th:text="${usr.apellidoMaterno}"></span></td>
+			<td><span th:text="${usr.fechaNacimiento}"></span></td>
+			<td><span th:text="${usr.username}"></span></td>
+			<td><span th:text="${usr.email}"></span></td>
+			<td><span th:text="${usr.status}"></span></td>
+		</tr>
+	</table>
+</body>
+</html>
