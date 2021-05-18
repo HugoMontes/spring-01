@@ -2,12 +2,15 @@ package com.educomser.app.model;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class UsuarioModel {
 
 	private int id;
 	private String nombre;
 	private String apellidoPaterno;
 	private String apellidoMaterno;
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date fechaNacimiento;
 	private String username;
 	private String password;

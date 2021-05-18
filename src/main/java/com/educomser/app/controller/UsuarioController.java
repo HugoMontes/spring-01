@@ -1,14 +1,20 @@
 package com.educomser.app.controller;
 
+import java.util.Date;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.educomser.app.model.UsuarioModel;
 import com.educomser.app.service.UsuarioService;
 
 @Controller
@@ -28,4 +34,18 @@ public class UsuarioController {
 		mv.addObject("usuarios", usuarioService.obtenerTodos());
 		return mv;
 	}
+	
+	@GetMapping("/nuevo")
+	public String nuevo(Model model) {
+		LOG.info("Call: nuevo");
+        model.addAttribute("usuario", new UsuarioModel());
+        return "usuario/nuevo";
+    }
+	
+	@PostMapping("/guardar")
+	public String guardar(@ModelAttribute("usuario") UsuarioModel usuario){
+		LOG.info("Call: guardar --PARAM: "+usuario.toString());
+		usuarioService.guardar(usuario);
+		return "redirect:/usuario/nuevo";
+	}	
 }

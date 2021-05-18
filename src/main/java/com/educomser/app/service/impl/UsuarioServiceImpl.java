@@ -12,6 +12,7 @@ import com.educomser.app.entities.Usuario;
 import com.educomser.app.model.UsuarioModel;
 import com.educomser.app.repository.UsuarioRepository;
 import com.educomser.app.service.UsuarioService;
+import com.educomser.app.util.MD5;
 
 @Service("usuarioServiceImpl")
 public class UsuarioServiceImpl implements UsuarioService {
@@ -28,6 +29,11 @@ public class UsuarioServiceImpl implements UsuarioService {
 	public UsuarioModel guardar(UsuarioModel usuarioModel) {
 		// Convertir a una entidad para guardar
 		Usuario usuario = usuarioConverter.modelToEntity(usuarioModel);
+		// Ingresar la fecha de creacion y actualizacion
+		usuario.setCreatedAt(new java.util.Date());
+		usuario.setUpdatedAt(new java.util.Date());
+		// Cifrar la contraseña
+		usuario.setPassword(MD5.getMd5(usuario.getPassword()));
 		// Guardar en la base de datos
 		usuario = usuarioRepository.save(usuario);
 		// Convertir en un modelo para retornar

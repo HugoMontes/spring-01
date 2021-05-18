@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>NUEVO CURSO</h1>
+	<form th:action="@{/usuario/guardar}" th:object="${usuario}" method="post">
+		<p>Nombre: <input type="text" th:field="*{nombre}"/></p>
+		<p>Apellido Paterno: <input type="text" th:field="*{apellidoPaterno}"/></p>
+		<p>Apellido Materno: <input type="text" th:field="*{apellidoMaterno}"/></p>
+		<p>Fecha Nacimiento: <input type="text" th:field="*{fechaNacimiento}"/></p>
+		<p>Nombre de usuario: <input type="text" th:field="*{username}"/></p>
+		<p>Contraseña: <input type="password" th:field="*{password}"/></p>
+		<p>Email: <input type="text" th:field="*{email}"/></p>
+		<p>Estado: <input type="text" th:field="*{status}"/></p>
+		<p><input type="submit" value="Guardar"/></p>
+	</form>
+</body>
+</html>
