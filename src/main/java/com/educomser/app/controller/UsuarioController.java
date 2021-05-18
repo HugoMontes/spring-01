@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.educomser.app.model.UsuarioModel;
 import com.educomser.app.service.UsuarioService;
@@ -43,9 +44,10 @@ public class UsuarioController {
     }
 	
 	@PostMapping("/guardar")
-	public String guardar(@ModelAttribute("usuario") UsuarioModel usuario){
+	public String guardar(@ModelAttribute("usuario") UsuarioModel usuario, RedirectAttributes redirAttrs){
 		LOG.info("Call: guardar --PARAM: "+usuario.toString());
 		usuarioService.guardar(usuario);
+		redirAttrs.addFlashAttribute("message", "El registro se ha guardado correctamente.");
 		return "redirect:/usuario/nuevo";
 	}	
 }

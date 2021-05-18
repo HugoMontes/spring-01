@@ -6,6 +6,7 @@
 </head>
 <body>
 	<h1>NUEVO CURSO</h1>
+	<h3 th:text="${message}"></h3>
 	<form th:action="@{/usuario/guardar}" th:object="${usuario}" method="post">
 		<p>Nombre: <input type="text" th:field="*{nombre}"/></p>
 		<p>Apellido Paterno: <input type="text" th:field="*{apellidoPaterno}"/></p>
