@@ -14,7 +14,10 @@
 		<p>Nombre de usuario: <input type="text" th:field="*{username}"/></p>
 		<p>Contraseña: <input type="password" th:field="*{password}"/></p>
 		<p>Email: <input type="text" th:field="*{email}"/></p>
-		<p>Estado: <input type="text" th:field="*{status}"/></p>
+		<p>Estado: 
+			<input type="radio" th:field="*{status}" th:value="1"/> Activo
+			<input type="radio" th:field="*{status}" th:value="2"/> Inactivo
+		</p>
 		<p><input type="submit" value="Guardar"/></p>
 	</form>
 </body>

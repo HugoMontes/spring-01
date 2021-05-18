@@ -15,7 +15,7 @@ public class UsuarioModel {
 	private String username;
 	private String password;
 	private String email;
-	private short status;
+	private short status = 1;
 	
 	public UsuarioModel() {
 	}
