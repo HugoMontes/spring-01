@@ -1,23 +1,23 @@
-package com.educomser.app.model;
+package com.educomser.app.dto;
 
 import java.util.Date;
 
-import org.springframework.format.annotation.DateTimeFormat;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
-public class UsuarioModel {
+public class UsuarioDto {
 
 	private int id;
 	private String nombre;
 	private String apellidoPaterno;
 	private String apellidoMaterno;
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@JsonFormat(pattern="dd/MM/yyyy")
 	private Date fechaNacimiento;
 	private String username;
 	private String password;
 	private String email;
 	private short status = 1;
 	
-	public UsuarioModel() {
+	public UsuarioDto() {
 	}
 
 	public int getId() {
