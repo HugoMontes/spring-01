@@ -44,6 +44,12 @@ public class UsuarioServiceImpl implements UsuarioService {
 	public UsuarioDto actualizar(UsuarioDto usuarioDto) {
 		// Convertir a una entidad para actualizar
 		Usuario usuario = usuarioConverter.dtoToEntity(usuarioDto);
+		// Regla de negocio: No permitir editar la fecha de creacion 
+		// Buscar usuario antes de editar y setear fecha creacion
+		Usuario usuarioFind = usuarioRepository.findById(usuario.getId()); 
+		usuario.setCreatedAt(usuarioFind.getCreatedAt());
+		// Cifrar el password editado
+		usuario.setPassword(MD5.getMd5(usuario.getPassword()));
 		// Cambiar la fecha de actualizacion
 		usuario.setUpdatedAt(new java.util.Date());
 		// Actualizar en la base de datos
