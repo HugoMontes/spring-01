@@ -2,18 +2,29 @@ package com.educomser.app.dto;
 
 import java.util.Date;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class UsuarioDto {
 
 	private int id;
+	@NotEmpty(message = "nombre es requerido")
+	@Size(min=2, max=30, message = "Caracteres entre 2 y 30")
 	private String nombre;
+	@NotEmpty(message="apellidoPaterno es requerido")
 	private String apellidoPaterno;
 	private String apellidoMaterno;
 	@JsonFormat(pattern="dd/MM/yyyy")
 	private Date fechaNacimiento;
+	@NotEmpty(message = "username es requerido")
 	private String username;
+	@NotEmpty(message = "password es requerido")
 	private String password;
+	@NotEmpty(message = "email es requerido")
+	@Email(message = "El email no es valido")
 	private String email;
 	private short status = 1;
 	
