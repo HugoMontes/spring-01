@@ -1,5 +1,8 @@
 package com.educomser.app.controller;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 import javax.validation.Valid;
 
 import org.apache.commons.logging.Log;
@@ -28,17 +31,25 @@ public class UsuarioRestController {
 	private UsuarioService usuarioService;
 
 	@PostMapping("/guardar")
-	public ResponseEntity<UsuarioDto> guardar(@RequestBody @Valid UsuarioDto usuario) {
+	public ResponseEntity<Object> guardar(@RequestBody @Valid UsuarioDto usuario) {
 		LOG.info("Call: guardar");
 		// Una vez que se guarda retorna el registro guardado
 		usuario = usuarioService.guardar(usuario);
-		return new ResponseEntity<UsuarioDto>(usuario, HttpStatus.OK);
+		// Preparar una respuesta
+		Map<String, Object> body = new LinkedHashMap<>();
+		body.put("message", "El usuario se ha guardado correctamente.");
+		body.put("usuario", usuario);
+		// Retornar la respuesta
+		return new ResponseEntity<>(body, HttpStatus.OK);
 	}
 	
 	@PutMapping("/actualizar")
-	public ResponseEntity<UsuarioDto> actualizar(@RequestBody @Valid UsuarioDto usuario) {
+	public ResponseEntity<Object> actualizar(@RequestBody @Valid UsuarioDto usuario) {
 		LOG.info("Call: actualizar");
 		usuario = usuarioService.actualizar(usuario);
-		return new ResponseEntity<UsuarioDto>(usuario, HttpStatus.OK);
+		Map<String, Object> body = new LinkedHashMap<>();
+		body.put("message", "El usuario se ha editado correctamente.");
+		body.put("usuario", usuario);
+		return new ResponseEntity<>(body, HttpStatus.OK);
 	}	
 }
