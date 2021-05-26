@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -70,5 +71,20 @@ public class UsuarioRestController {
 			body.put("message", "No existe el usuario con id "+id);
 			return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
 		}		
+	}
+	
+	@GetMapping("/buscar/{id}")
+	public ResponseEntity<Object> buscar(@PathVariable("id") int id) {
+		LOG.info("Call: buscar");
+		try {
+			UsuarioDto usuario = usuarioService.buscarPorId(id);
+			Map<String, Object> body = new LinkedHashMap<>();
+			body.put("usuario", usuario);
+			return new ResponseEntity<>(body, HttpStatus.OK);
+		} catch(NullPointerException ex) {
+			Map<String, Object> body = new LinkedHashMap<>();
+			body.put("message", "No existe el usuario con id "+id);
+			return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
+		}
 	}
 }
