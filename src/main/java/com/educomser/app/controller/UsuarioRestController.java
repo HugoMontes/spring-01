@@ -1,6 +1,7 @@
 package com.educomser.app.controller;
 
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.validation.Valid;
@@ -9,6 +10,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -87,4 +89,14 @@ public class UsuarioRestController {
 			return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
 		}
 	}
+	
+//	@GetMapping("/listar")
+//	public List<UsuarioDto> listar(){
+//		return usuarioService.obtenerTodos();
+//	}	
+	
+	@GetMapping("/listar")
+	public List<UsuarioDto> listar(Pageable pageable){
+		return usuarioService.obtenerTodosPaginados(pageable);
+	}	
 }

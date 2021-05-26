@@ -2,6 +2,8 @@ package com.educomser.app.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Pageable;
+
 import com.educomser.app.dto.UsuarioDto;
 
 public interface UsuarioService {
@@ -11,4 +13,5 @@ public interface UsuarioService {
 	public abstract List<UsuarioDto> obtenerTodos();
 	public abstract UsuarioDto buscarPorId(int id);
 	public abstract List<UsuarioDto> buscarPorNombre(String nombre);
+	public abstract List<UsuarioDto> obtenerTodosPaginados(Pageable pageable);
 }

@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.educomser.app.converter.UsuarioConverter;
@@ -44,9 +45,9 @@ public class UsuarioServiceImpl implements UsuarioService {
 	public UsuarioDto actualizar(UsuarioDto usuarioDto) {
 		// Convertir a una entidad para actualizar
 		Usuario usuario = usuarioConverter.dtoToEntity(usuarioDto);
-		// Regla de negocio: No permitir editar la fecha de creacion 
+		// Regla de negocio: No permitir editar la fecha de creacion
 		// Buscar usuario antes de editar y setear fecha creacion
-		Usuario usuarioFind = usuarioRepository.findById(usuario.getId()); 
+		Usuario usuarioFind = usuarioRepository.findById(usuario.getId());
 		usuario.setCreatedAt(usuarioFind.getCreatedAt());
 		// Cifrar el password editado
 		usuario.setPassword(MD5.getMd5(usuario.getPassword()));
@@ -90,6 +91,18 @@ public class UsuarioServiceImpl implements UsuarioService {
 	public List<UsuarioDto> buscarPorNombre(String nombre) {
 		// Buscar registros por nombre
 		List<Usuario> usuarios = usuarioRepository.findByNombre(nombre);
+		// Convertir listado de entidades a modelos
+		List<UsuarioDto> usuariosModel = new ArrayList<UsuarioDto>();
+		for (Usuario usuario : usuarios) {
+			usuariosModel.add(usuarioConverter.entityToDto(usuario));
+		}
+		return usuariosModel;
+	}
+
+	@Override
+	public List<UsuarioDto> obtenerTodosPaginados(Pageable pageable) {
+		// Buscar registros paginados
+		List<Usuario> usuarios = usuarioRepository.findAll(pageable).getContent();
 		// Convertir listado de entidades a modelos
 		List<UsuarioDto> usuariosModel = new ArrayList<UsuarioDto>();
 		for (Usuario usuario : usuarios) {
