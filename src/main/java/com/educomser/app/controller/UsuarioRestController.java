@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -51,5 +53,22 @@ public class UsuarioRestController {
 		body.put("message", "El usuario se ha editado correctamente.");
 		body.put("usuario", usuario);
 		return new ResponseEntity<>(body, HttpStatus.OK);
-	}	
+	}
+	
+	@DeleteMapping("/eliminar/{id}")
+	public ResponseEntity<Object> eliminarUsuario(@PathVariable("id") int id) {
+		LOG.info("Call: eliminar");
+		try {
+			UsuarioDto usuario = usuarioService.buscarPorId(id);
+			usuarioService.eliminar(usuario);
+			Map<String, Object> body = new LinkedHashMap<>();
+			body.put("message", "El usuario se ha eliminado correctamente.");
+			body.put("usuario", usuario);
+			return new ResponseEntity<>(body, HttpStatus.OK);
+		} catch(NullPointerException ex) {
+			Map<String, Object> body = new LinkedHashMap<>();
+			body.put("message", "No existe el usuario con id "+id);
+			return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
+		}		
+	}
 }
