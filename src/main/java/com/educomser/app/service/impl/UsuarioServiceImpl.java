@@ -9,8 +9,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.educomser.app.converter.UsuarioConverter;
-import com.educomser.app.entities.Usuario;
 import com.educomser.app.dto.UsuarioDto;
+import com.educomser.app.entities.Usuario;
 import com.educomser.app.repository.UsuarioRepository;
 import com.educomser.app.service.UsuarioService;
 import com.educomser.app.util.MD5;

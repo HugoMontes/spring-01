@@ -22,4 +22,7 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Serializable>,
 	
 	// Devuelve datos paginados
 	public abstract Page<Usuario> findAll(Pageable pageable);
+	
+	// Buscar por nombre de usuario
+	public abstract Usuario findByUsername(String username);
 }
